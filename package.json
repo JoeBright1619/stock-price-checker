@@ -4,6 +4,7 @@
 	"description": "InfoSec project for freeCodeCamp",
 	"scripts": {
 		"start": "node server.js"
+		
 	},
 	"dependencies": {
 		"bcrypt": "^5.1.1",

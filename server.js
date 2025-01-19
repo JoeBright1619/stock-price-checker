@@ -7,6 +7,7 @@ const cors        = require('cors');
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -16,6 +17,18 @@ app.use(cors({origin: '*'})); //For FCC testing purposes only
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(helmet({ 
+  contentSecurityPolicy:{
+  directives: {
+    defaultSrc: ["'self'"], // Only allow content from your server
+    scriptSrc: ["'self'"], // Allow scripts only from your server
+    styleSrc: ["'self'"], // Allow CSS only from your server
+    objectSrc: ["'none'"], // Disallow plugins like Flash
+    upgradeInsecureRequests: true, // Upgrade HTTP requests to HTTPS
+  }
+}
+}));
 
 //Index page (static HTML)
 app.route('/')
